@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  nfs-server:
+    image: itsthenetwork/nfs-server-alpine:latest
+    container_name: nfs-server
+    privileged: true
+    volumes:
+      - /backup:/nfs-exports
+    environment:
+      - SHARED_DIRECTORY=/nfs-exports
+    ports:
+      - "2049:2049"
+      - "112:111"
+    restart: always
+
+  web-file-manager:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    volumes:
+      - /backup:/srv
+    ports:
+      - "8081:80"
+    restart: always
+

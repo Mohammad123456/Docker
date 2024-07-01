@@ -1,0 +1,16 @@
+firts you shoud create LVM 
+ 
+1- lsblk
+2- sudo pvcreate /dev/sdc
+3- sudo vgcreate backup /dev/sdc
+4- sudo lvcreate -n backup-lvm -l 100%FREE backup
+5- sudo mkfs.ext4 /dev/vgname/backup-lvm
+=======
+sudo mkdir /backup
+sudo mount /dev/backup/backup-lvm /backup
+=======
+sudo echo '/dev/vgname/lvname /mnt/postgres_backup ext4 defaults 0 0' >> /etc/fstab
+
+
+
+
