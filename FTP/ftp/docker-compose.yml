@@ -1,0 +1,24 @@
+
+version: '3.8'
+
+services:
+  ftp-server:
+    image: fauria/vsftpd
+    container_name: ftp-server
+    ports:
+      - "22002:21"
+      - "10000-10100:10000-10100" # Passive ports range
+    volumes:
+      - ./vsftpd.conf:/etc/vsftpd.conf
+      - ./ftp-data:/home/vsftpd
+    environment:
+      FTP_USER: "mohammad"
+      FTP_PASS: "Moh@mm@d1373"
+      PASV_ADDRESS: "192.168.153.153" # Replace with your server's IP address
+      PASV_MIN_PORT: "10000"
+      PASV_MAX_PORT: "10100"
+      FILE_OPEN_MODE: "0666"
+      LOCAL_UMASK: "022"
+      XFERLOG_STD_FORMAT: "YES"
+volumes:
+  ftp-data:
